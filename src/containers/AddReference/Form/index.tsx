@@ -1,14 +1,14 @@
 "use client";
 import { createReferenceHistory } from "@/actions/referenceHistory";
 import RhfWrapper from "@/components/common/RhfWrapper";
+import Spinner from "@/components/common/Spinner";
 import SelectField from "@/components/form-fields/Select";
 import TextAreaField from "@/components/form-fields/TextArea";
 import { Button } from "@/components/ui/Button";
+import { referenceTypeOptions } from "@/constants/selectOptions";
 import { useFormWithAction } from "@/hooks/useFormWithAction";
-import { ReferenceType } from "@/types/enums";
 import { z } from "zod";
 import { addReferenceFormSchema } from "../schema";
-import Spinner from "@/components/common/Spinner";
 
 const AddRefernceForm = () => {
   const { form, isPending, submitFunc } = useFormWithAction<
@@ -24,24 +24,7 @@ const AddRefernceForm = () => {
         name="reference_type"
         label="Reference Type"
         placeholder="Add Reference Type"
-        items={[
-          {
-            label: "Yousuf Qadri Executive",
-            value: ReferenceType.YOUSUF_QADRI_EXECUTIVE,
-          },
-          {
-            label: "Kumail Raza Executive",
-            value: ReferenceType.KUMAIL_RAZA_EXECUTIVE,
-          },
-          {
-            label: "Amaan Nadeem Executive",
-            value: ReferenceType.AMAAN_NADEEM_EXECUTIVE,
-          },
-          {
-            label: "Company",
-            value: ReferenceType.COMPANY,
-          },
-        ]}
+        items={referenceTypeOptions}
         helperText="Person's Reference key"
       />
       <TextAreaField

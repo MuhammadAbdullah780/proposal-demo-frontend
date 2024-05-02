@@ -4,6 +4,7 @@ import React from "react";
 import { FaRegCopy } from "react-icons/fa";
 import { MdClear } from "react-icons/md";
 import { useProposalContext } from "../context";
+import Markdown from "react-markdown";
 
 const ProposalContainer = () => {
   // Context
@@ -11,13 +12,10 @@ const ProposalContainer = () => {
 
   return (
     <>
-      <div
-        className="flex flex-col gap-3"
-        dangerouslySetInnerHTML={{
-          __html: text as string,
-        }}
-      />
-      <div className="absolute top-8 right-10 space-x-2">
+      <Markdown skipHtml className="space-y-3">
+        {text}
+      </Markdown>
+      <div className="absolute top-4 right-10 space-x-2">
         <Button
           size="icon"
           variant="outline"

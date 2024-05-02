@@ -14,8 +14,8 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/Sheet";
+import { referenceTypeOptions } from "@/constants/selectOptions";
 import { useFormWithAction } from "@/hooks/useFormWithAction";
-import { ReferenceType } from "@/types/enums";
 import { useState } from "react";
 import { z } from "zod";
 import { useProposalContext } from "../context";
@@ -47,7 +47,7 @@ const ProposalFormDrawer = () => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Create Proposal</Button>
-      <Sheet open={open} onOpenChange={() => setOpen(!open)}>
+      <Sheet modal open={open} onOpenChange={() => setOpen(!open)}>
         <SheetContent className="flex flex-col gap-4">
           <SheetHeader>
             <SheetTitle>Create Proposal</SheetTitle>
@@ -68,24 +68,7 @@ const ProposalFormDrawer = () => {
               name="referenceType"
               label="Reference Type"
               placeholder="Add Reference Type"
-              items={[
-                {
-                  label: "Yousuf Qadri Executive",
-                  value: ReferenceType.YOUSUF_QADRI_EXECUTIVE,
-                },
-                {
-                  label: "Kumail Raza Executive",
-                  value: ReferenceType.KUMAIL_RAZA_EXECUTIVE,
-                },
-                {
-                  label: "Amaan Nadeem Executive",
-                  value: ReferenceType.AMAAN_NADEEM_EXECUTIVE,
-                },
-                {
-                  label: "Company",
-                  value: ReferenceType.COMPANY,
-                },
-              ]}
+              items={referenceTypeOptions}
               helperText="Person's Reference key"
             />
             <InputField
