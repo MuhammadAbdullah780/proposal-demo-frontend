@@ -1,69 +1,42 @@
-"use client";
-import SelectField from "@/components/form-fields/Select";
-import TextAreaField from "@/components/form-fields/TextArea";
-import { Button } from "@/components/ui/Button";
-import { Form } from "@/components/ui/Form";
-import { ReferenceType } from "@/types/enums";
-import { useTransition } from "react";
-import { useForm } from "react-hook-form";
-import { action } from "./server";
+// "use client";
+// import RhfWrapper from "@/components/common/RhfWrapper";
+// import RichTextField from "@/components/form-fields/RichText";
+// import { useFormWithAction } from "@/hooks/useFormWithAction";
+// import dynamic from "next/dynamic";
+// import React, { useState } from "react";
+// import { useForm } from "react-hook-form";
+// import "react-quill/dist/quill.snow.css";
+// import { z } from "zod";
 
-export default function Home() {
-  const [isPending, startTransition] = useTransition();
-  const form = useForm();
+// type Props = {};
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = form;
+// const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
-  const onSubmit = handleSubmit((data) => {
-    startTransition(async () => {
-      await action();
-    });
-  });
+// const HomePage = (props: Props) => {
+//   const [value, setValue] = useState("");
 
-  return (
-    <Form {...form}>
-      <form onSubmit={onSubmit}>
-        <SelectField
-          name="reference_type"
-          label="Reference Type"
-          placeholder="Add Reference Type"
-          items={[
-            {
-              label: "Yousuf Qadri Executive",
-              value: ReferenceType.YOUSUF_QADRI_EXECUTIVE,
-            },
-            {
-              label: "Kumail Raza Executive",
-              value: ReferenceType.KUMAIL_RAZA_EXECUTIVE,
-            },
-            {
-              label: "Amaan Nadeem Executive",
-              value: ReferenceType.AMAAN_NADEEM_EXECUTIVE,
-            },
-            {
-              label: "Company",
-              value: ReferenceType.COMPANY,
-            },
-          ]}
-          helperText="Person's Reference key"
-        />
-        <TextAreaField
-          label="Information"
-          name="text"
-          placeholder="Enter Person's Information"
-          helperText="Person's Information with respect to the following reference type"
-          textAreaProps={{
-            rows: 5,
-          }}
-        />
-        <Button type="submit">
-          {isPending ? "Loading" : "Create Reference"}
-        </Button>
-      </form>
-    </Form>
-  );
-}
+//   const form = useFormWithAction<{}>({
+//     async action(data) {
+//       return;
+//     },
+//     schema: z.object({}),
+//   });
+
+//   return (
+//     <RhfWrapper {...form}>
+//       <RichTextField label="Sample" name="sample" />
+//     </RhfWrapper>
+//   );
+// };
+
+// export default HomePage;
+
+import React from "react";
+
+type Props = {};
+
+const page = (props: Props) => {
+  return <div>page</div>;
+};
+
+export default page;

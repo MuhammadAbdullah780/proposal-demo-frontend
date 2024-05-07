@@ -9,6 +9,7 @@ import { referenceTypeOptions } from "@/constants/selectOptions";
 import { useFormWithAction } from "@/hooks/useFormWithAction";
 import { z } from "zod";
 import { addReferenceFormSchema } from "../schema";
+import { Separator } from "@/components/ui/Seperator";
 
 const AddRefernceForm = () => {
   const { form, isPending, submitFunc } = useFormWithAction<
@@ -36,10 +37,14 @@ const AddRefernceForm = () => {
           rows: 5,
         }}
       />
-      <Button type="submit" className="flex gap-2">
-        {isPending && <Spinner spinnerColor="white" size="extra_small" />}
-        Create Reference
-      </Button>
+      <Separator className="my-4 w-full" />
+      <div className="flex items-center justify-end gap-3 w-full">
+        <Button variant="outline">Cancel</Button>
+        <Button type="submit" className="flex gap-2">
+          {isPending && <Spinner spinnerColor="white" size="extra_small" />}
+          Create Reference
+        </Button>
+      </div>
     </RhfWrapper>
   );
 };

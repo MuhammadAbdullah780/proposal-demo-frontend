@@ -46,7 +46,7 @@ const ProposalFormDrawer = () => {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>Create Proposal</Button>
+      <Button onClick={() => setOpen(true)}>Generate Proposal</Button>
       <Sheet modal open={open} onOpenChange={() => setOpen(!open)}>
         <SheetContent className="flex flex-col gap-4">
           <SheetHeader>
@@ -90,7 +90,7 @@ const ProposalFormDrawer = () => {
           <SheetFooter>
             <Button form={formId} className="flex gap-2" type="submit">
               {isPending && <Spinner spinnerColor="white" size="extra_small" />}
-              {isPending ? "Generating" : "Generate Proposal"}
+              {isPending ? "Generating" : "Generate"}
             </Button>
           </SheetFooter>
         </SheetContent>
