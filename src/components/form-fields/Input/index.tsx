@@ -16,6 +16,8 @@ type Props = {
   label: string;
   inputProps?: InputProps;
   helperText?: string | React.ReactNode;
+  placeholder?: string;
+  wrapperClassName?: string;
 };
 
 const InputField = ({
@@ -24,6 +26,8 @@ const InputField = ({
   label,
   inputProps,
   helperText,
+  placeholder,
+  wrapperClassName = "",
 }: Props) => {
   const { control } = useFormContext();
 
@@ -32,10 +36,10 @@ const InputField = ({
       control={control}
       name={name as never}
       render={({ field, fieldState }) => (
-        <FormItem>
+        <FormItem className={wrapperClassName}>
           <FormLabel {...labelProps}>{label}</FormLabel>
           <FormControl>
-            <Input {...inputProps} {...field} />
+            <Input {...inputProps} placeholder={placeholder} {...field} />
           </FormControl>
           {helperText && !fieldState?.error && (
             <FormDescription>{helperText}</FormDescription>
