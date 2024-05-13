@@ -7,6 +7,8 @@ type Props = {
   searchParams: Record<string, any>;
 };
 
+export const dynamic = true;
+
 const CreateProposalPage: NextPage<Props> = ({ searchParams }) => {
   return (
     <ProposalContextProvider>
