@@ -4,3 +4,8 @@ export enum ReferenceType {
   YOUSUF_QADRI_EXECUTIVE = "yousuf-qadri-executive",
   COMPANY = "company",
 }
+
+export enum ModalType {
+  CHAT_GPT = "gpt",
+  GEMINI = "gemini",
+}

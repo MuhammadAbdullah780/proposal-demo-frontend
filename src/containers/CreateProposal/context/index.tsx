@@ -1,30 +1,31 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 
+// Typings
 type ProposalContext = {
   text: string | null;
   setText: (text: string | null) => any;
 };
 
+// Context
 const ProposalContext = createContext<ProposalContext>({
   text: null,
   setText: () => {},
 });
 
+// Provider
 const ProposalContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
+  // States
   const [text, setText] = useState<string | null>(null);
 
+  // Functions
   const updateText = (newText: string | null) => {
     setText(newText);
   };
-
-  useEffect(() => {
-    console.log(text, "TEXT____");
-  }, [text]);
 
   return (
     <ProposalContext.Provider value={{ setText: updateText, text }}>
@@ -33,6 +34,7 @@ const ProposalContextProvider = ({
   );
 };
 
+// Hooks
 export const useProposalContext = () => {
   const context = useContext(ProposalContext);
   if (!context) {

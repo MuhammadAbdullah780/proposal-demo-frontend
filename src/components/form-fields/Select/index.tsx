@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/Select";
-import React, { useEffect } from "react";
+import React from "react";
 import { useFormContext } from "react-hook-form";
 
 type Props = {
@@ -26,6 +26,8 @@ type Props = {
     value: string;
   }[];
   helperText?: string | React.ReactNode;
+  wrapperClassName?: string;
+  disabled?: boolean;
 };
 
 const SelectField = ({
@@ -35,6 +37,8 @@ const SelectField = ({
   placeholder,
   items,
   helperText,
+  wrapperClassName = "",
+  disabled = false,
 }: Props) => {
   const { control } = useFormContext();
 
@@ -43,9 +47,12 @@ const SelectField = ({
       control={control}
       name={name as never}
       render={({ field, fieldState }) => (
-        <FormItem>
+        <FormItem className={wrapperClassName}>
           <FormLabel {...labelProps}>{label}</FormLabel>
-          <Select onValueChange={field.onChange} value={field.value}>
+          <Select
+            disabled={disabled}
+            onValueChange={field.onChange}
+            value={field.value}>
             <FormControl>
               <SelectTrigger>
                 <SelectValue placeholder={placeholder} />

@@ -8,13 +8,6 @@ import { createProposalSchema } from "@/containers/CreateProposal/CreateProposal
 export const generateProposal = async (
   data: z.infer<typeof createProposalSchema>,
 ) => {
-  console.log("HI__");
-  // return new Promise((resolve, reject) => {
-  //   setTimeout(() => {
-  //     resolve(null);
-  //   }, 7000);
-  // });
-
   try {
     const { data: axiosRes } = await axios({
       baseURL: process.env.BASE_URL,

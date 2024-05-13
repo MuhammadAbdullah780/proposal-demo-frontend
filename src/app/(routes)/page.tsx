@@ -1,42 +1,31 @@
-// "use client";
-// import RhfWrapper from "@/components/common/RhfWrapper";
-// import RichTextField from "@/components/form-fields/RichText";
-// import { useFormWithAction } from "@/hooks/useFormWithAction";
-// import dynamic from "next/dynamic";
-// import React, { useState } from "react";
-// import { useForm } from "react-hook-form";
-// import "react-quill/dist/quill.snow.css";
-// import { z } from "zod";
+"use client";
+import RhfWrapper from "@/components/common/RhfWrapper";
+import RichTextField from "@/components/form-fields/RichText";
+import { useFormWithAction } from "@/hooks/useFormWithAction";
+import { z } from "zod";
 
-// type Props = {};
+const MainPage = () => {
+  const form = useFormWithAction<{ sample: string }>({
+    async action(data) {
+      console.log(data, "DATA______");
+    },
+    schema: z.object({
+      sample: z.string(),
+    }),
+    defaultValues: {
+      sample: "",
+    },
+  });
 
-// const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-
-// const HomePage = (props: Props) => {
-//   const [value, setValue] = useState("");
-
-//   const form = useFormWithAction<{}>({
-//     async action(data) {
-//       return;
-//     },
-//     schema: z.object({}),
-//   });
-
-//   return (
-//     <RhfWrapper {...form}>
-//       <RichTextField label="Sample" name="sample" />
-//     </RhfWrapper>
-//   );
-// };
-
-// export default HomePage;
-
-import React from "react";
-
-type Props = {};
-
-const page = (props: Props) => {
-  return <div>page</div>;
+  return (
+    <RhfWrapper {...form}>
+      <RichTextField
+        label="Sample RichText Field"
+        name="sample"
+        helperText="This is Helper Text"
+      />
+    </RhfWrapper>
+  );
 };
 
-export default page;
+export default MainPage;
