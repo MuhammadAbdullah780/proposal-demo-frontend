@@ -24,9 +24,9 @@ const ReferenceListingTable = async () => {
   // Server Actions
   const payload: any = await getReferences();
 
-  if (!payload?.isSuccess) {
-    notFound();
-  }
+  // if (!payload?.isSuccess) {
+  //   notFound();
+  // }
 
   // Functions
   const referenceTypeListing = await payload?.data?.map((item: any) => {
