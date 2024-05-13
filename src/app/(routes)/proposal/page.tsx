@@ -10,7 +10,7 @@ type Props = {
 const CreateProposalPage: NextPage<Props> = ({ searchParams }) => {
   return (
     <ProposalContextProvider>
-      <CreateProposal searchParams={searchParams} />
+      <CreateProposal />
     </ProposalContextProvider>
   );
 };
