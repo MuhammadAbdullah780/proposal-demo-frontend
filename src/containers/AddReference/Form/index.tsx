@@ -19,6 +19,8 @@ import { useFormWithAction } from "@/hooks/useFormWithAction";
 // Schemas
 import { addReferenceFormSchema } from "../schema";
 
+export const dynamic = true;
+
 const AddRefernceForm = () => {
   // Hooks
   const router = useRouter();

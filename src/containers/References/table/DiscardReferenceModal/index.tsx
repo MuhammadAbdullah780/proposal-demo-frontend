@@ -25,6 +25,8 @@ type Props = {
   id: string;
 };
 
+export const dynamic = true;
+
 const DiscardReferenceModal = ({ id }: Props) => {
   // Hooks
   const [isPending, startTransition] = useTransition();

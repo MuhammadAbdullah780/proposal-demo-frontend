@@ -18,6 +18,8 @@ import ViewReferenceInfoModal from "./ViewReferenceInfoModal";
 // Actions
 import { getReferences } from "@/actions/referenceHistory";
 
+export const dynamic = true;
+
 const ReferenceListingTable = async () => {
   // Server Actions
   const payload: any = await getReferences();

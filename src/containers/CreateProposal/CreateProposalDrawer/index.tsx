@@ -36,6 +36,8 @@ import { createProposalSchema } from "./schema";
 import FormDrawer from "@/components/common/FormDrawer";
 import { getReferences } from "@/actions/referenceHistory";
 
+export const dynamic = true;
+
 const ProposalFormDrawer = () => {
   const [references, setReferences] = useState<
     { label: string; value: string }[] | null

@@ -29,6 +29,8 @@ type Props = {
   id: string;
 };
 
+export const dynamic = true;
+
 const EditReferenceDrawer = ({
   reference_type,
   referenceTypeListing,
