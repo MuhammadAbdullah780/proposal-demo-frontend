@@ -10,7 +10,7 @@ export const createReferenceHistory = async (
 ): Promise<any> => {
   try {
     const { data: axiosRes } = await axios({
-      baseURL: process.env.BASE_URL,
+      baseURL: "https://proposal-automation-demo-backend.vercel.app/api/v1",
       data,
       url: ApiPaths.ADD_REFERENCE,
       method: "POST",
