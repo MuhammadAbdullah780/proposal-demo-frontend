@@ -1,4 +1,3 @@
-"use server";
 import { ApiPaths } from "@/config/path";
 import { addReferenceFormSchema } from "@/containers/AddReference/schema";
 import { editReferenceFormSchema } from "@/containers/References/table/EditReferenceDrawer/schema";

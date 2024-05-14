@@ -1,5 +1,3 @@
-"use server";
-
 import { ApiPaths } from "@/config/path";
 import axios from "axios";
 import { z } from "zod";
