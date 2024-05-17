@@ -1,5 +1,6 @@
 import { FaHistory } from "react-icons/fa";
 import { MdOutlineAssignment } from "react-icons/md";
+import { CgTemplate } from "react-icons/cg";
 
 export const sidebarConfig = [
   {
@@ -10,8 +11,14 @@ export const sidebarConfig = [
   },
   {
     icon: <MdOutlineAssignment />,
-    text: "Proposals",
-    to: "/proposal",
-    matcher: ["/proposal", "/proposal/generate"],
+    text: "Submissions",
+    to: "/submissions",
+    matcher: ["/submissions"],
+  },
+  {
+    icon: <CgTemplate />,
+    text: "Prompts",
+    to: "/prompts",
+    matcher: ["/prompts"],
   },
 ];

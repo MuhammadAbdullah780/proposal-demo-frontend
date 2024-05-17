@@ -1,24 +1,20 @@
 "use client";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 // Typings
-type ProposalContext = {
+type PromptContext = {
   text: string | null;
   setText: (text: string | null) => any;
 };
 
 // Context
-const ProposalContext = createContext<ProposalContext>({
+const PromptContext = createContext<PromptContext>({
   text: null,
   setText: () => {},
 });
 
 // Provider
-const ProposalContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const PromptContextProvider = ({ children }: { children: React.ReactNode }) => {
   // States
   const [text, setText] = useState<string | null>(null);
 
@@ -28,19 +24,19 @@ const ProposalContextProvider = ({
   };
 
   return (
-    <ProposalContext.Provider value={{ setText: updateText, text }}>
+    <PromptContext.Provider value={{ setText: updateText, text }}>
       {children}
-    </ProposalContext.Provider>
+    </PromptContext.Provider>
   );
 };
 
 // Hooks
-export const useProposalContext = () => {
-  const context = useContext(ProposalContext);
+export const usePromptContext = () => {
+  const context = useContext(PromptContext);
   if (!context) {
     throw new Error("useAppContext must be used within an AppProvider");
   }
   return context;
 };
 
-export default ProposalContextProvider;
+export default PromptContextProvider;

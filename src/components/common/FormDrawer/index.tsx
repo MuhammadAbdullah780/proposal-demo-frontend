@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/Button";
-import { Separator } from "@/components/ui/Seperator";
+import { Separator } from "@/components/ui/Separator";
 import {
   Sheet,
   SheetContent,

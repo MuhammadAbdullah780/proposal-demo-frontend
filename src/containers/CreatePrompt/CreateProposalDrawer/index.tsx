@@ -22,19 +22,23 @@ import {
 import { generateProposal } from "@/actions/proposal";
 
 // Constants
-import { referenceTypeOptions } from "@/constants/selectOptions";
+import {
+  modalTypeOptions,
+  referenceTypeOptions,
+} from "@/constants/selectOptions";
 
 // Hooks
 import { useFormWithAction } from "@/hooks/useFormWithAction";
 import { useModalState } from "@/hooks/useModalState";
 
 // Context
-import { useProposalContext } from "../context";
+import { usePromptContext } from "../context";
 
 // Schema
 import { createProposalSchema } from "./schema";
 import FormDrawer from "@/components/common/FormDrawer";
 import { getReferences } from "@/actions/referenceHistory";
+import { ModalType } from "@/types/enums";
 
 const ProposalFormDrawer = () => {
   const [references, setReferences] = useState<
@@ -45,7 +49,7 @@ const ProposalFormDrawer = () => {
   const formId = "generate-proposal-form";
 
   // Context
-  const { setText } = useProposalContext();
+  const { setText } = usePromptContext();
 
   // Hooks
   const { currentValue, handleChange } = useModalState();
@@ -102,16 +106,7 @@ const ProposalFormDrawer = () => {
           name="llm"
           label="Modal Type"
           placeholder="Enter Modal Type"
-          items={[
-            {
-              label: "Chat GPT",
-              value: "gpt",
-            },
-            {
-              label: "Google Gemini",
-              value: "gemini",
-            },
-          ]}
+          items={modalTypeOptions}
           helperText="Choose Language model for generating the proposal."
         />
         <InputField

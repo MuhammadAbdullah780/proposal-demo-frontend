@@ -9,7 +9,7 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <aside className="h-screen flex flex-col gap-4 w-60 border-r border-gray-200 bg-white">
+    <aside className="h-screen flex flex-col gap-4 w-68 border-r border-gray-200 bg-white">
       <div className="px-8 pt-1">
         <Image src="/logo.png" alt="Logo" width={70} height={70} />
       </div>

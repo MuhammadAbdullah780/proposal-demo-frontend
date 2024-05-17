@@ -1,30 +1,28 @@
-"use client";
-import RhfWrapper from "@/components/common/RhfWrapper";
-import RichTextField from "@/components/form-fields/RichText";
-import { useFormWithAction } from "@/hooks/useFormWithAction";
-import { z } from "zod";
+import DataTable from "@/components/common/DataTable";
+import DemoReactTable from "../data-table-demo";
+import { columns } from "../data-table-demo/columns";
 
 const MainPage = () => {
-  const form = useFormWithAction<{ sample: string }>({
-    async action(data) {
-      console.log(data, "DATA______");
-    },
-    schema: z.object({
-      sample: z.string(),
-    }),
-    defaultValues: {
-      sample: "",
-    },
-  });
-
   return (
-    <RhfWrapper {...form}>
-      <RichTextField
-        label="Sample RichText Field"
-        name="sample"
-        helperText="This is Helper Text"
+    <div className="bg-white p-10">
+      <DataTable
+        columns={columns}
+        data={[
+          {
+            id: "728ed52f",
+            amount: 100,
+            status: "pending",
+            email: "n@example.com",
+          },
+          {
+            id: "728ed52f",
+            amount: 190,
+            status: "pending",
+            email: "m@example.com",
+          },
+        ]}
       />
-    </RhfWrapper>
+    </div>
   );
 };
 

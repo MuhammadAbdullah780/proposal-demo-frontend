@@ -3,18 +3,18 @@ import { Button } from "@/components/ui/Button";
 import React from "react";
 import { FaRegCopy } from "react-icons/fa";
 import { MdClear } from "react-icons/md";
-import { useProposalContext } from "../context";
+import { usePromptContext } from "../context";
 import Markdown from "react-markdown";
+import MarkdownRenderer from "@/components/common/MarkdownRenderer";
+import RichTextRenderer from "@/components/common/RichTextRenderer";
 
 const ProposalContainer = () => {
   // Context
-  const { text, setText } = useProposalContext();
+  const { text, setText } = usePromptContext();
 
   return (
     <>
-      <Markdown skipHtml className="space-y-3">
-        {text}
-      </Markdown>
+      <MarkdownRenderer text={text!} />
       <div className="absolute top-4 right-10 space-x-2">
         <Button
           size="icon"
