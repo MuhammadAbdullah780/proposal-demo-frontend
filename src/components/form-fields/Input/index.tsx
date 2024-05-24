@@ -13,7 +13,7 @@ import { useFormContext } from "react-hook-form";
 type Props = {
   name: string;
   labelProps?: React.ComponentPropsWithRef<"label">;
-  label: string;
+  label?: string;
   inputProps?: InputProps;
   helperText?: string | React.ReactNode;
   placeholder?: string;
@@ -37,7 +37,7 @@ const InputField = ({
       name={name as never}
       render={({ field, fieldState }) => (
         <FormItem className={wrapperClassName}>
-          <FormLabel {...labelProps}>{label}</FormLabel>
+          {label && <FormLabel {...labelProps}>{label}</FormLabel>}
           <FormControl>
             <Input {...inputProps} placeholder={placeholder} {...field} />
           </FormControl>

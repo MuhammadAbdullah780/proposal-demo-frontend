@@ -1,21 +1,24 @@
-"use client";
 import PageHeading from "@/components/common/PageHeading";
-import { usePromptContext } from "./context";
-import EmptyProposal from "./EmptyProposal";
-import ProposalContainer from "./ProposalContainer";
+import React from "react";
+import AddRefernceForm from "../AddReference/Form";
+import CreatePromptForm from "./Form";
 
-const CreatePrompt = () => {
-  // Context
-  const { text } = usePromptContext();
+type Props = {};
 
+const CreatePromptContainer = (props: Props) => {
   return (
-    <div className="flex flex-col gap-5 max-w-screen overflow-x-hidden p-8">
-      <PageHeading text="Generate Proposal" />
-      <section className="w-full relative rounded-xl p-8 bg-gray-50 pt-16">
-        {text ? <ProposalContainer /> : <EmptyProposal />}
-      </section>
+    <div className="w-full min-h-full flex justify-center py-20 bg-white">
+      <div className="flex flex-col gap-5 p-5 w-full max-w-5xl">
+        <PageHeading
+          text="Create Prompt"
+          description="Create a new Prompt and train It."
+        />
+        <section>
+          <CreatePromptForm />
+        </section>
+      </div>
     </div>
   );
 };
 
-export default CreatePrompt;
+export default CreatePromptContainer;

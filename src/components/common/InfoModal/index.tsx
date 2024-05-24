@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/Dialog";
 import RichTextRenderer from "../RichTextRenderer";
 import MarkdownRenderer from "../MarkdownRenderer";
+import { cn } from "@/lib/utils";
 
 type Props = {
   text: string;
@@ -21,6 +22,7 @@ type Props = {
   title: string;
   textFormat?: "richText" | "markdownText";
   description?: string;
+  contentClassName?: string;
 };
 
 const InfoModal = ({
@@ -29,6 +31,7 @@ const InfoModal = ({
   title,
   textFormat = "richText",
   description,
+  contentClassName = "",
 }: Props) => {
   return (
     <Dialog>
@@ -40,7 +43,11 @@ const InfoModal = ({
           <DialogTitle>{title}</DialogTitle>
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
-        <div className="w-full h-[400px] bg-secondary p-5 overflow-x-hidden overflow-y-auto rounded-md flex flex-col gap-3">
+        <div
+          className={cn([
+            "w-full h-full max-h-[400px] bg-secondary p-5 overflow-x-hidden overflow-y-auto rounded-md flex flex-col gap-3",
+            contentClassName,
+          ])}>
           {textFormat === "richText" && <RichTextRenderer text={text} />}
           {textFormat === "markdownText" && <MarkdownRenderer text={text} />}
         </div>

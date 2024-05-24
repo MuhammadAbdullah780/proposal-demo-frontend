@@ -13,12 +13,12 @@ export const sidebarConfig = [
     icon: <MdOutlineAssignment />,
     text: "Submissions",
     to: "/submissions",
-    matcher: ["/submissions"],
+    matcher: ["/submissions", "/submissions/create"],
   },
   {
     icon: <CgTemplate />,
     text: "Prompts",
     to: "/prompts",
-    matcher: ["/prompts"],
+    matcher: ["/prompts", "/prompts/create"],
   },
 ];

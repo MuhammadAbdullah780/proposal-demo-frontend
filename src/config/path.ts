@@ -15,4 +15,10 @@ export class ApiPaths {
    */
   static CREATE_PROPOSAL = "/submissions/proposal/create";
   static FETCH_SUBMISSIONS = "/submissions/";
+
+  /**
+   * Prompt API's
+   */
+  static CREATE_PROMPT_TEMPLATE = "/prompts/create";
+  static FETCH_PROMPTS = "/prompts";
 }

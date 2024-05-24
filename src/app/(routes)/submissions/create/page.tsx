@@ -1,6 +1,6 @@
-import PromptContextProvider from "@/containers/CreatePrompt/context";
+import PromptContextProvider from "@/containers/CreateSubmission/context";
 import React from "react";
-import CreateProposal from "@/containers/CreatePrompt";
+import CreateProposal from "@/containers/CreateSubmission";
 
 const CreatePromptPage = () => {
   return (
