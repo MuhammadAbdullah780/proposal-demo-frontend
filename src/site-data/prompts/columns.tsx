@@ -2,11 +2,13 @@
 import InfoModal from "@/components/common/InfoModal";
 import MarkdownRenderer from "@/components/common/MarkdownRenderer";
 import { Button } from "@/components/ui/Button";
+import DeletePromptModal from "@/containers/PromptsListing/DeletePrompt";
 import EditPromptDrawer from "@/containers/PromptsListing/EditPromptDrawer";
+import { Prompt } from "@/types/prompt";
 import { ColumnDef } from "@tanstack/react-table";
 import { MdDelete, MdEdit } from "react-icons/md";
 
-export const promptListingColumns: ColumnDef<any>[] = [
+export const promptListingColumns: ColumnDef<Prompt>[] = [
   {
     accessorKey: "title",
     header: "Title",
@@ -64,16 +66,9 @@ export const promptListingColumns: ColumnDef<any>[] = [
   },
   {
     accessorKey: "",
-    header: "Actions",
+    header: "Action",
     cell(p) {
-      return (
-        <div className="flex gap-3">
-          <EditPromptDrawer />
-          <Button size="icon" variant="destructive">
-            <MdDelete />
-          </Button>
-        </div>
-      );
+      return <DeletePromptModal id={p?.row?.original?._id} />;
     },
   },
 ];

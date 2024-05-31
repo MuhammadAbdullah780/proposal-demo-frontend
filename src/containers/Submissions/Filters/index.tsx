@@ -70,7 +70,7 @@ const SubmissionFilters: React.FC<Props> = ({}) => {
       <div className="flex gap-4 w-full justify-between items-end">
         <div className="flex gap-4 w-full">
           {/* Search Through Project Title */}
-          <div className="max-w-[300px] w-full flex flex-col gap-2">
+          {/* <div className="max-w-[300px] w-full flex flex-col gap-2">
             <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
               Search
             </label>
@@ -95,15 +95,15 @@ const SubmissionFilters: React.FC<Props> = ({}) => {
                 }}
               />
             </div>
-          </div>
+          </div> */}
           {/* LLM TYPE */}
           <div className="max-w-[200px] w-full flex flex-col gap-2">
             <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
               LLM Type
             </label>
             <Select
-              defaultValue={searchParams?.get("generated_from") || undefined}
-              // value={searchParams?.get("generated_from") || undefined}
+              // defaultValue={searchParams?.get("generated_from") || undefined}
+              value={searchParams?.get("generated_from") || undefined}
               onValueChange={(value) => {
                 addQueryParam("generated_from", value);
                 // applyPathRevalidation("/submissions");

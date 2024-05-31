@@ -54,3 +54,23 @@ export const fetchPrompts = async () => {
     };
   }
 };
+
+export const deletePrompt = async (id: string) => {
+  try {
+    const { data } = await axios({
+      baseURL: process.env.BASE_URL,
+      url: ApiPaths.DELETE_PROMPT(id),
+      method: "DELETE",
+    });
+
+    revalidatePath("/prompts");
+
+    return data;
+  } catch (error: any) {
+    console.log(error?.response?.data?.message, "ERROR__MESSAGE____");
+    return {
+      message: error?.response?.data?.message,
+      isSuccess: false,
+    };
+  }
+};

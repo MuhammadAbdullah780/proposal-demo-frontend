@@ -5,19 +5,11 @@ import { ColumnDef } from "@tanstack/react-table";
 
 export const submissionsListingColumns: ColumnDef<any>[] = [
   {
-    accessorKey: "payload.project_title",
-    header: "Project Title",
+    accessorKey: "serialNo",
+    header: "Title",
     enableSorting: false,
     cell(p) {
-      return <p className="truncate max-w-[100px]">{String(p?.getValue())}</p>;
-    },
-  },
-  {
-    accessorKey: "payload.project_description",
-    enableSorting: false,
-    header: "Project Description",
-    cell(p) {
-      return <p className="truncate max-w-[250px]">{String(p?.getValue())}</p>;
+      return <p>{String(p?.getValue())}</p>;
     },
   },
   {

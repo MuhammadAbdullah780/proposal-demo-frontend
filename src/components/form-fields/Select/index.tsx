@@ -28,6 +28,8 @@ type Props = {
   helperText?: string | React.ReactNode;
   wrapperClassName?: string;
   disabled?: boolean;
+  onBeforeChange?: () => void | Promise<void>;
+  onAfterChange?: () => void | Promise<void>;
 };
 
 const SelectField = ({
@@ -39,6 +41,8 @@ const SelectField = ({
   helperText,
   wrapperClassName = "",
   disabled = false,
+  onBeforeChange,
+  onAfterChange,
 }: Props) => {
   const { control } = useFormContext();
 
@@ -46,34 +50,42 @@ const SelectField = ({
     <FormField
       control={control}
       name={name as never}
-      render={({ field, fieldState }) => (
-        <FormItem className={wrapperClassName}>
-          <FormLabel {...labelProps}>{label}</FormLabel>
-          <Select
-            disabled={disabled}
-            onValueChange={field.onChange}
-            value={field.value}>
-            <FormControl>
-              <SelectTrigger>
-                <SelectValue placeholder={placeholder} />
-              </SelectTrigger>
-            </FormControl>
-            <SelectContent>
-              {items?.map((item, i) => {
-                return (
-                  <SelectItem key={i} value={item.value}>
-                    {item.label}
-                  </SelectItem>
-                );
-              })}
-            </SelectContent>
-          </Select>
-          {helperText && !fieldState?.error && (
-            <FormDescription>{helperText}</FormDescription>
-          )}
-          <FormMessage />
-        </FormItem>
-      )}
+      render={({ field, fieldState }) => {
+        const handleSelectChange = async (val: string) => {
+          await onBeforeChange?.();
+          field.onChange(val);
+          await onAfterChange?.();
+        };
+
+        return (
+          <FormItem className={wrapperClassName}>
+            <FormLabel {...labelProps}>{label}</FormLabel>
+            <Select
+              disabled={disabled}
+              onValueChange={handleSelectChange}
+              value={field.value}>
+              <FormControl>
+                <SelectTrigger>
+                  <SelectValue placeholder={placeholder} />
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent>
+                {items?.map((item, i) => {
+                  return (
+                    <SelectItem key={i} value={item.value}>
+                      {item.label}
+                    </SelectItem>
+                  );
+                })}
+              </SelectContent>
+            </Select>
+            {helperText && !fieldState?.error && (
+              <FormDescription>{helperText}</FormDescription>
+            )}
+            <FormMessage />
+          </FormItem>
+        );
+      }}
     />
   );
 };

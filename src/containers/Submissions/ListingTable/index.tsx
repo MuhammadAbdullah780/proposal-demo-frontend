@@ -11,6 +11,8 @@ const SubmissionListingTable = async ({ params }: Props) => {
     ...params,
   });
 
+  console.log(data?.data, "OUTER____");
+
   return (
     <DataTable columns={submissionsListingColumns} data={data?.data ?? []} />
   );

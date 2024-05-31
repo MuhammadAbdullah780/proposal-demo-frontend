@@ -3,29 +3,18 @@ import { useEffect, useState } from "react";
 import { z } from "zod";
 
 // Components
-import RhfWrapper from "@/components/common/RhfWrapper";
-import Spinner from "@/components/common/Spinner";
+import FormDrawer from "@/components/common/FormDrawer";
 import InputField from "@/components/form-fields/Input";
 import SelectField from "@/components/form-fields/Select";
-import TextAreaField from "@/components/form-fields/TextArea";
 import { Button } from "@/components/ui/Button";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/Sheet";
+import { Separator } from "@/components/ui/Separator";
 
 // Actions
-import { generateProposal } from "@/actions/proposal";
+import { fetchPrompts } from "@/actions/prompts";
+import { getReferences } from "@/actions/referenceHistory";
 
 // Constants
-import {
-  modalTypeOptions,
-  referenceTypeOptions,
-} from "@/constants/selectOptions";
+import { modalTypeOptions } from "@/constants/selectOptions";
 
 // Hooks
 import { useFormWithAction } from "@/hooks/useFormWithAction";
@@ -36,17 +25,28 @@ import { usePromptContext } from "../context";
 
 // Schema
 import { createProposalSchema } from "./schema";
-import FormDrawer from "@/components/common/FormDrawer";
-import { getReferences } from "@/actions/referenceHistory";
-import { ModalType } from "@/types/enums";
+
+// Utils
+import { camelToFormatted } from "@/utils/conversions";
+
+// Types
+import { SelectOption } from "@/types";
+import { Prompt } from "@/types/prompt";
+import { createSubmission } from "@/actions/submissions";
 
 const ProposalFormDrawer = () => {
-  const [references, setReferences] = useState<
-    { label: string; value: string }[] | null
-  >(null);
+  // Use States
+  const [references, setReferences] = useState<SelectOption | null>(null);
+  const [prompt, setPrompt] = useState<Prompt[] | null>(null);
 
   // Vars
   const formId = "generate-proposal-form";
+  const promptOptions = prompt?.map((item, i) => {
+    return {
+      label: item?.title,
+      value: item?._id,
+    };
+  });
 
   // Context
   const { setText } = usePromptContext();
@@ -56,7 +56,7 @@ const ProposalFormDrawer = () => {
   const { form, isPending, submitFunc } = useFormWithAction<
     z.infer<typeof createProposalSchema>
   >({
-    action: generateProposal,
+    action: createSubmission,
     schema: createProposalSchema,
     onSuccess(res) {
       setText(res?.data?.aiMessage);
@@ -64,6 +64,25 @@ const ProposalFormDrawer = () => {
     },
   });
 
+  // Extractions
+  const { getValues, setValue } = form;
+
+  // Functions
+  const handleDynamicFields = async () => {
+    // vars
+    const templateId = getValues("promptType");
+    const targetedRecord = prompt?.find((item) => item?._id === templateId);
+
+    // Formats the variables
+    const formattedVariables = targetedRecord?.variables?.map((item) => {
+      return { [item]: "" };
+    });
+
+    // Setting the value
+    setValue("templateVariables", formattedVariables || []);
+  };
+
+  // Use Effects
   useEffect(() => {
     const fetch = async () => {
       const data = await getReferences();
@@ -78,6 +97,17 @@ const ProposalFormDrawer = () => {
     };
     fetch();
   }, []);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const data = await fetchPrompts();
+
+      setPrompt(data?.data);
+    };
+    fetch();
+  }, []);
+
+  console.log(getValues(), "FORM________VALUES");
 
   return (
     <>
@@ -109,22 +139,32 @@ const ProposalFormDrawer = () => {
           items={modalTypeOptions}
           helperText="Choose Language model for generating the proposal."
         />
-        <InputField
-          label="Project title"
-          name="projectTitle"
-          placeholder="Enter Project Title"
-          helperText="Project title for your proposal"
-          inputProps={{ placeholder: "Enter Project Title" }}
+        <SelectField
+          name="promptType"
+          label="Prompt Type"
+          onAfterChange={handleDynamicFields}
+          placeholder="Enter Prompt Type"
+          items={promptOptions || []}
+          helperText="Choose Prompt Type"
         />
-        <TextAreaField
-          label="Project Description"
-          name="projectDescription"
-          placeholder="Enter Project Description"
-          helperText="Project Description for your proposal"
-          textAreaProps={{
-            rows: 5,
-          }}
-        />
+        {!!(getValues("templateVariables") || [])?.length && (
+          <div className="flex flex-col gap-3">
+            <p className="text-xs font-semibold">Additional Fields</p>
+            <Separator className="" />
+            {(getValues("templateVariables") || [])?.map((item, i) => {
+              return (
+                <InputField
+                  key={i}
+                  label={camelToFormatted(Object.keys(item)[0] || "")}
+                  name={`templateVariables.${i}.${Object.keys(item)[0]}`}
+                  placeholder="Enter Project Title"
+                  helperText="Project title for your proposal"
+                  inputProps={{ placeholder: "Enter Project Title" }}
+                />
+              );
+            })}
+          </div>
+        )}
       </FormDrawer>
     </>
   );
