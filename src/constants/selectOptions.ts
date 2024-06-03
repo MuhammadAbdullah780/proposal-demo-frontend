@@ -1,4 +1,4 @@
-import { ReferenceType } from "@/types/enums";
+import { ModalType, ReferenceType } from "@/types/enums";
 
 export const referenceTypeOptions = [
   {
@@ -16,5 +16,16 @@ export const referenceTypeOptions = [
   {
     label: "Company",
     value: ReferenceType.COMPANY,
+  },
+];
+
+export const modalTypeOptions = [
+  {
+    label: "Chat GPT",
+    value: ModalType.CHAT_GPT,
+  },
+  {
+    label: "Google Gemini",
+    value: ModalType.GEMINI,
   },
 ];
