@@ -7,6 +7,8 @@ type Props = {
 };
 
 const SubmissionListingTable = async ({ params }: Props) => {
+  console.log(params, "PARAMS____");
+
   const data: any = await fetchSubmissions({
     ...params,
   });

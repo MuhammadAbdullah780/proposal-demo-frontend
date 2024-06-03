@@ -3,11 +3,14 @@ import { ApiPaths } from "@/config/path";
 import { createProposalSchema } from "@/containers/CreateSubmission/CreateProposalDrawer/schema";
 import { ModalType } from "@/types/enums";
 import axios from "axios";
+import { unstable_noStore } from "next/cache";
 import { z } from "zod";
 
 type FetchSubmissionArgs = {
   generated_from?: ModalType;
 };
+
+unstable_noStore();
 
 export const fetchSubmissions = async (query: FetchSubmissionArgs = {}) => {
   try {

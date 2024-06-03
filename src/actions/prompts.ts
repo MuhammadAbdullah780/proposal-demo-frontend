@@ -2,7 +2,9 @@
 
 import { ApiPaths } from "@/config/path";
 import axios from "axios";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore } from "next/cache";
+
+unstable_noStore();
 
 type CreatePromptTemplateArgs = {
   template: string;

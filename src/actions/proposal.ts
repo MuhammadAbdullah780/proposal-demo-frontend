@@ -3,6 +3,9 @@ import { ApiPaths } from "@/config/path";
 import axios from "axios";
 import { z } from "zod";
 import { createProposalSchema } from "@/containers/CreateSubmission/CreateProposalDrawer/schema";
+import { unstable_noStore } from "next/cache";
+
+unstable_noStore();
 
 export const generateProposal = async (
   data: z.infer<typeof createProposalSchema>,

@@ -3,8 +3,10 @@ import { ApiPaths } from "@/config/path";
 import { addReferenceFormSchema } from "@/containers/AddReference/schema";
 import { editReferenceFormSchema } from "@/containers/References/table/EditReferenceDrawer/schema";
 import axios from "axios";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore } from "next/cache";
 import { z } from "zod";
+
+unstable_noStore();
 
 export const createReferenceHistory = async (
   data: z.infer<typeof addReferenceFormSchema>,
