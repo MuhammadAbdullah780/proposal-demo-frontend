@@ -3,7 +3,7 @@
 import { ApiPaths } from "@/config/path";
 import axios from "axios";
 import { z } from "zod";
-import { createProposalSchema } from "@/containers/CreateProposal/CreateProposalDrawer/schema";
+import { createProposalSchema } from "@/containers/CreateSubmission/CreateProposalDrawer/schema";
 
 export const generateProposal = async (
   data: z.infer<typeof createProposalSchema>,

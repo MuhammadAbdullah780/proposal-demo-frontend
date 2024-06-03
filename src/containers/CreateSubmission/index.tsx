@@ -1,12 +1,12 @@
 "use client";
 import PageHeading from "@/components/common/PageHeading";
-import { useProposalContext } from "./context";
+import { usePromptContext } from "./context";
 import EmptyProposal from "./EmptyProposal";
 import ProposalContainer from "./ProposalContainer";
 
-const CreateProposal = () => {
+const CreatePrompt = () => {
   // Context
-  const { text } = useProposalContext();
+  const { text } = usePromptContext();
 
   return (
     <div className="flex flex-col gap-5 max-w-screen overflow-x-hidden p-8">
@@ -18,4 +18,4 @@ const CreateProposal = () => {
   );
 };
 
-export default CreateProposal;
+export default CreatePrompt;

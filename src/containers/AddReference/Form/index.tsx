@@ -8,7 +8,7 @@ import Spinner from "@/components/common/Spinner";
 import InputField from "@/components/form-fields/Input";
 import RichTextField from "@/components/form-fields/RichText";
 import { Button } from "@/components/ui/Button";
-import { Separator } from "@/components/ui/Seperator";
+import { Separator } from "@/components/ui/Separator";
 
 // Actions
 import { createReferenceHistory } from "@/actions/referenceHistory";
