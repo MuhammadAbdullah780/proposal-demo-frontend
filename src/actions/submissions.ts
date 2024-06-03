@@ -3,7 +3,7 @@ import { ApiPaths } from "@/config/path";
 import { createProposalSchema } from "@/containers/CreateSubmission/CreateProposalDrawer/schema";
 import { ModalType } from "@/types/enums";
 import axios from "axios";
-import { unstable_noStore } from "next/cache";
+import { revalidatePath, unstable_noStore } from "next/cache";
 import { z } from "zod";
 
 type FetchSubmissionArgs = {
@@ -82,6 +82,8 @@ export const createSubmission = async (
     });
 
     console.log(axiosRes, "RES___");
+
+    await revalidatePath("/submissions");
 
     return {
       isError: false,

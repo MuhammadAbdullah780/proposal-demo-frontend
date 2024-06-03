@@ -24,6 +24,8 @@ export const createPromptTemplate = async (
       method: "POST",
     });
 
+    await revalidatePath("/prompts");
+
     return {
       isError: false,
       isSuccess: true,
