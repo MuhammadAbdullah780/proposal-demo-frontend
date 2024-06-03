@@ -65,21 +65,28 @@ const ProposalFormDrawer = () => {
   });
 
   // Extractions
-  const { getValues, setValue } = form;
+  const { getValues, setValue, watch } = form;
 
   // Functions
-  const handleDynamicFields = async () => {
+  const handleDynamicFields = () => {
+    console.log("CHALA___________");
+
     // vars
     const templateId = getValues("promptType");
     const targetedRecord = prompt?.find((item) => item?._id === templateId);
 
     // Formats the variables
-    const formattedVariables = targetedRecord?.variables?.map((item) => {
-      return { [item]: "" };
-    });
+    const formattedVariables =
+      targetedRecord?.variables?.map((item) => {
+        return { [item]: "" };
+      }) || [];
+
+    console.log(formattedVariables, "FORMATTED_VARIABLES____");
 
     // Setting the value
-    setValue("templateVariables", formattedVariables || []);
+    setValue("templateVariables", formattedVariables);
+
+    console.log("FORM____VALUES____", getValues());
   };
 
   // Use Effects
@@ -147,19 +154,29 @@ const ProposalFormDrawer = () => {
           items={promptOptions || []}
           helperText="Choose Prompt Type"
         />
-        {!!(getValues("templateVariables") || [])?.length && (
+        {!!(watch("templateVariables") || [])?.length && (
           <div className="flex flex-col gap-3">
             <p className="text-xs font-semibold">Additional Fields</p>
             <Separator className="" />
-            {(getValues("templateVariables") || [])?.map((item, i) => {
+            {(watch("templateVariables") || [])?.map((item, i) => {
+              console.log(
+                {
+                  item,
+                  getValues: getValues("templateVariables"),
+                },
+                "GET__VALUES___",
+              );
+
+              console.log(
+                `templateVariables.${i}.${Object.keys(item)[0]}`,
+                "FIELD____NAME____",
+              );
+
               return (
                 <InputField
                   key={i}
                   label={camelToFormatted(Object.keys(item)[0] || "")}
                   name={`templateVariables.${i}.${Object.keys(item)[0]}`}
-                  placeholder="Enter Project Title"
-                  helperText="Project title for your proposal"
-                  inputProps={{ placeholder: "Enter Project Title" }}
                 />
               );
             })}

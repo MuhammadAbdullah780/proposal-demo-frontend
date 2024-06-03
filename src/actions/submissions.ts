@@ -72,9 +72,9 @@ export const createSubmission = async (
     console.log(payload, "PAYLOAD_____");
 
     const { data: axiosRes } = await axios({
-      baseURL: "http://localhost:3001/api/v1",
+      baseURL: process?.env?.BASE_URL,
       data: payload,
-      url: "/submissions/create",
+      url: ApiPaths.CREATE_SUBMISSION,
       method: "POST",
     });
 
